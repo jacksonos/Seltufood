@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>Controlador</servlet-name>
+        <servlet-class>servlets.Controlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletUsuario</servlet-name>
+        <servlet-class>servlets.ServletUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletUsuarioLogout</servlet-name>
+        <servlet-class>servlets.ServletUsuarioLogout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletDashboard</servlet-name>
+        <servlet-class>servlets.ServletDashboard</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controlador</servlet-name>
+        <url-pattern>/Controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletUsuario</servlet-name>
+        <url-pattern>/ServletUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletUsuarioLogout</servlet-name>
+        <url-pattern>/ServletUsuarioLogout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletDashboard</servlet-name>
+        <url-pattern>/ServletDashboard</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <dependencies/>
+</web-app>
