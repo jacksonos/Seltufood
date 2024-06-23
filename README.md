@@ -1,7 +1,7 @@
 
 # Seltufood 🍅| Java JSP 
 
-¡Bienvenido! 👋 Este proyecto es una website sencilla ecommerce de venta de comida vegetariana.
+¡Bienvenid@! 👋 Este proyecto es una website sencilla ecommerce de venta de comida vegetariana.
 
 ## Requisitos previos ❗
 
