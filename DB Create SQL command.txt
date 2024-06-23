@@ -1,0 +1,473 @@
+create database selt;
+use selt;
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 06-12-2021 a las 16:40:32
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.11
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `newbdseltufoodremake`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria_platillo`
+--
+
+CREATE TABLE `categoria_platillo` (
+  `Idcategoria` int(10) NOT NULL,
+  `Nombre` varchar(255) NOT NULL,
+  `Estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categoria_platillo`
+--
+
+INSERT INTO `categoria_platillo` (`Idcategoria`, `Nombre`, `Estado`) VALUES
+(1, 'Arroces', 0),
+(2, 'Carnes vegetales', 1),
+(3, 'Sándwiches y bocadillos', 1),
+(4, 'Dulces', 1),
+(5, 'Pastas', 1),
+(6, 'Ensaladas', 1),
+(7, 'Hamburguesas vegetales', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `Idcliente` int(10) NOT NULL,
+  `Nombres` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `Apellidos` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `Genero` varchar(255) NOT NULL,
+  `Direccion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `Correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `Password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `Estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`Idcliente`, `Nombres`, `Apellidos`, `Genero`, `Direccion`, `Correo`, `Password`, `Estado`) VALUES
+(1, 'Ernesto', 'De la Cruz', 'Femenino', '83 S. Westport StreetElgin, IL 60120', 'prueba@yahoo.eu', 'prueba12345', 1),
+(2, 'Pedro', 'Artezca', 'Masculino', 'Jr. Randomize 422', 'azazcape@gmail.com', 'randompassword1234', 1),
+(3, 'Pedro', 'Suarez', 'Masculino', 'Miami Beach 173', 'pedro@hotmail.com', 'pedro12345', 1),
+(4, 'Astraea', 'Nili\r\n ', 'Masculino', '8315 Cypress Drive\r\nDearborn Heights, MI 48127', 'jourdin.yahushua@logdots.com', 'nilini4411', 1),
+(5, 'Marika', 'Love', 'Femenino', '(815) 733-6024\r\n25019 Brigade Ln\r\nPlainfield, Illinois(IL), 60544', 'yesonto@mailbiscuit.com', 'marilovelove69', 1),
+(6, 'Anna', 'Rihards', 'Femenino', '80 Atlantic Ave.\r\nSnohomish, WA 98290', 'Anna@gmail.com', 'clientepasswordrandom', 1),
+(7, 'Wolf', 'Patka', 'Masculino', '381 Arcadia Rd.\r\nClermont, FL 34711', 'patwof@yahoo.eu', 'patka12345', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compra`
+--
+
+CREATE TABLE `compra` (
+  `Idcompra` int(10) NOT NULL,
+  `Idcliente` int(10) NOT NULL,
+  `Idpago` int(10) NOT NULL,
+  `Fechacompra` varchar(11) NOT NULL,
+  `Monto` double NOT NULL,
+  `Estado` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`Idcompra`, `Idcliente`, `Idpago`, `Fechacompra`, `Monto`, `Estado`) VALUES
+(1, 2, 2, '2021-12-05', 26, 'Cancelado - En Proceso de Envio'),
+(2, 2, 3, '2021-12-05', 11, 'Cancelado - En Proceso de Envio'),
+(3, 1, 4, '2021-12-05', 33.5, 'Cancelado - En Proceso de Envio'),
+(4, 1, 5, '2021-12-05', 31.5, 'Cancelado - En Proceso de Envio'),
+(5, 7, 6, '2021-12-06', 67.5, 'Cancelado - En Proceso de Envio'),
+(6, 6, 7, '2021-12-06', 119, 'Cancelado - En Proceso de Envio'),
+(7, 5, 8, '2021-12-06', 35, 'Cancelado - En Proceso de Envio'),
+(8, 4, 9, '2021-12-06', 56, 'Cancelado - En Proceso de Envio'),
+(9, 1, 10, '2021-12-06', 66.5, 'Cancelado - En Proceso de Envio');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_compra`
+--
+
+CREATE TABLE `detalle_compra` (
+  `Iddetalle` int(10) NOT NULL,
+  `Idproducto` int(10) NOT NULL,
+  `Idcompra` int(10) NOT NULL,
+  `Cantidad` int(10) NOT NULL,
+  `Precio` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detalle_compra`
+--
+
+INSERT INTO `detalle_compra` (`Iddetalle`, `Idproducto`, `Idcompra`, `Cantidad`, `Precio`) VALUES
+(3, 2, 1, 2, 13),
+(4, 6, 2, 1, 11),
+(5, 14, 3, 1, 17.5),
+(6, 5, 3, 1, 16),
+(7, 9, 4, 1, 17),
+(8, 11, 4, 1, 14.5),
+(9, 14, 5, 1, 17.5),
+(10, 7, 5, 1, 18),
+(11, 5, 5, 2, 16),
+(12, 7, 6, 6, 18),
+(13, 6, 6, 1, 11),
+(14, 14, 7, 2, 17.5),
+(15, 7, 8, 2, 18),
+(16, 13, 8, 1, 20),
+(17, 1, 9, 2, 15),
+(18, 12, 9, 1, 16.5),
+(19, 13, 9, 1, 20);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_venta`
+--
+
+CREATE TABLE `detalle_venta` (
+  `Iddetalleventa` int(10) NOT NULL,
+  `Idventa` int(10) NOT NULL,
+  `Idproducto` int(10) NOT NULL,
+  `Cantidad` int(15) NOT NULL,
+  `Precioventa` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empleado`
+--
+
+CREATE TABLE `empleado` (
+  `Idempleado` int(10) NOT NULL,
+  `Idtipo_empleado` int(10) NOT NULL,
+  `Nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `Apellido` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `Genero` varchar(255) NOT NULL,
+  `Telefono` int(15) NOT NULL,
+  `Correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `Password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `Estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `empleado`
+--
+
+INSERT INTO `empleado` (`Idempleado`, `Idtipo_empleado`, `Nombre`, `Apellido`, `Genero`, `Telefono`, `Correo`, `Password`, `Estado`) VALUES
+(1, 1, 'Michel', 'Poma', 'Masculino', 123456789, 'michel@seltufood.com', 'michel12345', 1),
+(2, 2, 'Prueba', 'Prueba Apellido', 'Femenino', 789456123, 'prueba@seltufood.com', 'prueba12345', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pago`
+--
+
+CREATE TABLE `pago` (
+  `Idpago` int(10) NOT NULL,
+  `Monto` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pago`
+--
+
+INSERT INTO `pago` (`Idpago`, `Monto`) VALUES
+(1, 31),
+(2, 26),
+(3, 11),
+(4, 33.5),
+(5, 31.5),
+(6, 67.5),
+(7, 119),
+(8, 35),
+(9, 56),
+(10, 66.5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto`
+--
+
+CREATE TABLE `producto` (
+  `Idproducto` int(10) NOT NULL,
+  `Idcategoria` int(10) NOT NULL,
+  `Nombre` varchar(255) NOT NULL,
+  `Foto` varchar(300) NOT NULL,
+  `Descripcion` varchar(300) NOT NULL,
+  `Precio` double NOT NULL,
+  `Stock` int(10) NOT NULL,
+  `Estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`Idproducto`, `Idcategoria`, `Nombre`, `Foto`, `Descripcion`, `Precio`, `Stock`, `Estado`) VALUES
+(1, 1, 'Arroz con salsa de soja, champiñones y alcachofas', 'https://i.imgur.com/YBuy2p1.jpg', 'Arroz con salsa de soja, champiñones y alcachofas acompañado de patatas a la plancha. ', 15, 13, 1),
+(2, 1, 'Bowl saludable de arroz, hummus casero, crudités y calabaza', 'https://i.imgur.com/DiRDtnJ.jpg', 'Este plato es perfecto para entretiempo, de eso que empiezan a apetecer platos algo más contundentes y saciantes, pero que no pierdan frescor y ligereza. Con el arroz y el hummus conseguimos que sea un bowl saciante, además de rico en proteína vegetal.', 13, 15, 1),
+(3, 1, 'Bowl de arroz al curry con espárragos verdes y setas', 'https://i.imgur.com/TmRSfFs.jpg', 'Arroz al curry con verduras: espárragos verdes y setas ostra, que he acompañado con unos bocados de heura (una proteína vegetal derivada de legumbres, sin gluten y vegana) bien tostada.', 14, 15, 1),
+(4, 3, 'Burritos vegetales de heura', 'https://i.imgur.com/dcsxMDD.jpg', 'Burritos vegetales rellenos de Heura, tiras de cebolla, tiras de pimiento rojo, setas shiitake y una salsa mayonesa vegana de ajo y hierbas.', 18, 20, 1),
+(5, 3, 'Sándwich de atún vegetal', 'https://i.imgur.com/3cWnEt7.jpg', 'Sándwich a base de tofu firme de atún vegetal y pan tostado con lechuga, tomate y salsa de soya. ', 16, 20, 1),
+(6, 7, 'Hamburguesas de lentejas, champiñones y brócoli', 'https://i.imgur.com/dhFGIgw.jpg', 'Hamburguesa con \'carne\' hecha de lentejas, acompañada de brócoli, ajos, cebolla y champiñones.', 11, 20, 1),
+(7, 2, 'Lágrimas de «pollo» vegetal', 'https://i.imgur.com/gvXTHQU.jpg', 'Trozo a base de Heura, panko y pimentones.', 18, 15, 1),
+(8, 2, 'Medallones vegetarianos de garbanzo y avena', 'https://i.imgur.com/m6mGy6I.jpg', 'Medallones de garbanzo y avena con ajos, cebollas y albahaca.', 15, 25, 1),
+(9, 7, 'Hamburguesa vegetal de jackfruit', 'https://i.imgur.com/k5yrWYl.jpg', 'Hamburguesa picante a base de Jackfruit con cebolla y ajo', 17, 25, 1),
+(10, 4, 'Tarta brownie con leche condensada y mantequilla de almendras', 'https://i.imgur.com/zFilUCD.jpg', 'Tarta brownie de chocolate a base de mantequilla de almendras y leche de coco condensada vegana.', 12.5, 25, 1),
+(11, 4, 'Creppes veganas de vainilla (sin huevo)', 'https://i.imgur.com/90wPLTy.jpg', 'Creppes veganas de vainilla rellenas de crema de frutos secos.', 14.5, 25, 1),
+(12, 5, 'Espaguetis de espelta con salsa de boniato y verduras', 'https://i.imgur.com/Nd7dfLv.jpg', 'Espaguetis a base de espelta con boniato, zanahoria, calabacín y cebolla. ', 16.5, 25, 1),
+(13, 5, 'Macarrones gratinados en salsa boloñesa con queso de patata vegano casero', 'https://i.imgur.com/Sm1MjuH.jpg', 'Macarrones de queso de patata vegano de textura cremosa y sedosa.', 20, 25, 1),
+(14, 6, 'Bowl ensalada de arroz negro con ajoaceite vegano', 'https://i.imgur.com/11FU2vn.png', 'Ensalada arroz negro sazonado con una mezcla de setas y acompañado de coles de bruselas, tomates cherry y aguacate.', 17.5, 15, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_empleado`
+--
+
+CREATE TABLE `tipo_empleado` (
+  `Idtipo_empleado` int(11) NOT NULL,
+  `Nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `Estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipo_empleado`
+--
+
+INSERT INTO `tipo_empleado` (`Idtipo_empleado`, `Nombre`, `Estado`) VALUES
+(1, 'Admin', 1),
+(2, 'Empleado', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `Idventa` int(10) NOT NULL,
+  `Idcliente` int(10) NOT NULL,
+  `Idempleado` int(10) NOT NULL,
+  `Numeroserie` VARCHAR(255) NOT NULL,
+  `Fechaventa` date NOT NULL,
+  `Monto` double NOT NULL,
+  `Estado` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `categoria_platillo`
+--
+ALTER TABLE `categoria_platillo`
+  ADD PRIMARY KEY (`Idcategoria`);
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`Idcliente`);
+
+--
+-- Indices de la tabla `compra`
+--
+ALTER TABLE `compra`
+  ADD PRIMARY KEY (`Idcompra`),
+  ADD KEY `Idcliente` (`Idcliente`),
+  ADD KEY `Idpago` (`Idpago`);
+
+--
+-- Indices de la tabla `detalle_compra`
+--
+ALTER TABLE `detalle_compra`
+  ADD PRIMARY KEY (`Iddetalle`),
+  ADD KEY `Idproducto` (`Idproducto`),
+  ADD KEY `Iddcompra` (`Idcompra`);
+
+--
+-- Indices de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  ADD PRIMARY KEY (`Iddetalleventa`),
+  ADD KEY `Idventa` (`Idventa`),
+  ADD KEY `Idproducto` (`Idproducto`);
+
+--
+-- Indices de la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  ADD PRIMARY KEY (`Idempleado`),
+  ADD KEY `Idtipo_empleado` (`Idtipo_empleado`);
+
+--
+-- Indices de la tabla `pago`
+--
+ALTER TABLE `pago`
+  ADD PRIMARY KEY (`Idpago`);
+
+--
+-- Indices de la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`Idproducto`),
+  ADD KEY `Idcategoria` (`Idcategoria`);
+
+--
+-- Indices de la tabla `tipo_empleado`
+--
+ALTER TABLE `tipo_empleado`
+  ADD PRIMARY KEY (`Idtipo_empleado`);
+
+--
+-- Indices de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`Idventa`),
+  ADD KEY `Idcliente` (`Idcliente`),
+  ADD KEY `Idempleado` (`Idempleado`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `categoria_platillo`
+--
+ALTER TABLE `categoria_platillo`
+  MODIFY `Idcategoria` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `Idcliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `compra`
+--
+ALTER TABLE `compra`
+  MODIFY `Idcompra` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_compra`
+--
+ALTER TABLE `detalle_compra`
+  MODIFY `Iddetalle` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  MODIFY `Iddetalleventa` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  MODIFY `Idempleado` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `pago`
+--
+ALTER TABLE `pago`
+  MODIFY `Idpago` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `Idproducto` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_empleado`
+--
+ALTER TABLE `tipo_empleado`
+  MODIFY `Idtipo_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `Idventa` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `compra`
+--
+ALTER TABLE `compra`
+  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`Idpago`) REFERENCES `pago` (`Idpago`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`Idcliente`) REFERENCES `cliente` (`Idcliente`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `detalle_compra`
+--
+ALTER TABLE `detalle_compra`
+  ADD CONSTRAINT `detalle_compra_ibfk_1` FOREIGN KEY (`Idcompra`) REFERENCES `compra` (`Idcompra`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `detalle_compra_ibfk_2` FOREIGN KEY (`Idproducto`) REFERENCES `producto` (`Idproducto`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  ADD CONSTRAINT `detalle_venta_ibfk_1` FOREIGN KEY (`Idventa`) REFERENCES `ventas` (`Idventa`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `detalle_venta_ibfk_2` FOREIGN KEY (`Idproducto`) REFERENCES `producto` (`Idproducto`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  ADD CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`Idtipo_empleado`) REFERENCES `tipo_empleado` (`Idtipo_empleado`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`Idcategoria`) REFERENCES `categoria_platillo` (`Idcategoria`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`Idcliente`) REFERENCES `cliente` (`Idcliente`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`Idempleado`) REFERENCES `empleado` (`Idempleado`) ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
